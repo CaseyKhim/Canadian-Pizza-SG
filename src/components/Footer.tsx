@@ -2,7 +2,7 @@ import React from "react";
 import { Share2, MessageCircle, Instagram, MapPin } from "lucide-react";
 
 interface FooterProps {
-  onNavClick: (tab: "deals" | "menu" | "heritage" | "locations" | "tracker" | "comparison") => void;
+  onNavClick: (tab: "deals" | "menu" | "heritage" | "locations" | "tracker" | "comparison" | "social") => void;
 }
 
 export default function Footer({ onNavClick }: FooterProps) {

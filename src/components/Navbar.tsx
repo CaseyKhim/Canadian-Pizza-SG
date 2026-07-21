@@ -2,8 +2,8 @@ import React from "react";
 import { ShoppingCart, Menu, X } from "lucide-react";
 
 interface NavbarProps {
-  activeTab: "deals" | "menu" | "heritage" | "locations" | "tracker" | "comparison";
-  setActiveTab: (tab: "deals" | "menu" | "heritage" | "locations" | "tracker" | "comparison") => void;
+  activeTab: "deals" | "menu" | "heritage" | "locations" | "tracker" | "comparison" | "social";
+  setActiveTab: (tab: "deals" | "menu" | "heritage" | "locations" | "tracker" | "comparison" | "social") => void;
   cartCount: number;
   onCartClick: () => void;
   activeOrdersCount?: number;
@@ -18,7 +18,7 @@ export default function Navbar({
 }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
-  const handleNavClick = (tab: "deals" | "menu" | "heritage" | "locations" | "tracker" | "comparison") => {
+  const handleNavClick = (tab: "deals" | "menu" | "heritage" | "locations" | "tracker" | "comparison" | "social") => {
     setActiveTab(tab);
     setMobileMenuOpen(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -118,6 +118,17 @@ export default function Navbar({
           >
             COMPARISON
           </button>
+          <button 
+            id="nav-btn-social"
+            onClick={() => handleNavClick("social")}
+            className={`transition-all pb-1 border-b-2 hover:text-maple-red flex items-center gap-1.5 ${
+              activeTab === "social" 
+                ? "border-maple-red text-maple-red" 
+                : "border-transparent text-secondary hover:border-gray-200"
+            }`}
+          >
+            SOCIAL
+          </button>
         </div>
 
         {/* Action button & Shopping Cart */}
@@ -210,6 +221,14 @@ export default function Navbar({
             }`}
           >
             Comparison Study
+          </button>
+          <button 
+            onClick={() => handleNavClick("social")}
+            className={`text-left font-label text-[15px] font-bold py-2 ${
+              activeTab === "social" ? "text-maple-red" : "text-deep-charcoal"
+            }`}
+          >
+            Social Hub
           </button>
           <button 
             onClick={() => handleNavClick("menu")}

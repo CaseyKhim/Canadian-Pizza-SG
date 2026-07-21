@@ -13,9 +13,10 @@ import SubscribeBanner from "./components/SubscribeBanner";
 import { CartItem, PizzaItem, SideItem, PromoDeal, PizzaSize, Order, OrderStatus } from "./types";
 import OrderTracker from "./components/OrderTracker";
 import ComparisonTab from "./components/ComparisonTab";
+import SocialTab from "./components/SocialTab";
 
 export default function App() {
-  const [activeTab, setActiveTab] = React.useState<"deals" | "menu" | "heritage" | "locations" | "tracker" | "comparison">("deals");
+  const [activeTab, setActiveTab] = React.useState<"deals" | "menu" | "heritage" | "locations" | "tracker" | "comparison" | "social">("deals");
   const [cart, setCart] = React.useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = React.useState(false);
   const [customizingPizza, setCustomizingPizza] = React.useState<PizzaItem | null>(null);
@@ -240,10 +241,11 @@ export default function App() {
           />
         )}
         {activeTab === "comparison" && <ComparisonTab />}
+        {activeTab === "social" && <SocialTab />}
       </main>
 
       {/* Subscription Banner */}
-      {activeTab !== "heritage" && activeTab !== "tracker" && activeTab !== "comparison" && (
+      {activeTab !== "heritage" && activeTab !== "tracker" && activeTab !== "comparison" && activeTab !== "social" && (
         <div className="px-4 md:px-12">
           <SubscribeBanner />
         </div>
