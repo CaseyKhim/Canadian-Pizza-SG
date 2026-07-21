@@ -1,0 +1,6 @@
+{
+  "name": "Canadian 2 for 1 Pizza",
+  "description": "Authentic Canadian 2 for 1 Pizza deals, interactive menu, custom ordering, and store locator.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
