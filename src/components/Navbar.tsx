@@ -2,8 +2,8 @@ import React from "react";
 import { ShoppingCart, Menu, X } from "lucide-react";
 
 interface NavbarProps {
-  activeTab: "deals" | "menu" | "heritage" | "locations" | "tracker";
-  setActiveTab: (tab: "deals" | "menu" | "heritage" | "locations" | "tracker") => void;
+  activeTab: "deals" | "menu" | "heritage" | "locations" | "tracker" | "comparison";
+  setActiveTab: (tab: "deals" | "menu" | "heritage" | "locations" | "tracker" | "comparison") => void;
   cartCount: number;
   onCartClick: () => void;
   activeOrdersCount?: number;
@@ -18,7 +18,7 @@ export default function Navbar({
 }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
-  const handleNavClick = (tab: "deals" | "menu" | "heritage" | "locations" | "tracker") => {
+  const handleNavClick = (tab: "deals" | "menu" | "heritage" | "locations" | "tracker" | "comparison") => {
     setActiveTab(tab);
     setMobileMenuOpen(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -107,6 +107,17 @@ export default function Navbar({
               </span>
             )}
           </button>
+          <button 
+            id="nav-btn-comparison"
+            onClick={() => handleNavClick("comparison")}
+            className={`transition-all pb-1 border-b-2 hover:text-maple-red flex items-center gap-1.5 ${
+              activeTab === "comparison" 
+                ? "border-maple-red text-maple-red" 
+                : "border-transparent text-secondary hover:border-gray-200"
+            }`}
+          >
+            COMPARISON
+          </button>
         </div>
 
         {/* Action button & Shopping Cart */}
@@ -191,6 +202,14 @@ export default function Navbar({
                 {activeOrdersCount} ACTIVE
               </span>
             )}
+          </button>
+          <button 
+            onClick={() => handleNavClick("comparison")}
+            className={`text-left font-label text-[15px] font-bold py-2 ${
+              activeTab === "comparison" ? "text-maple-red" : "text-deep-charcoal"
+            }`}
+          >
+            Comparison Study
           </button>
           <button 
             onClick={() => handleNavClick("menu")}
