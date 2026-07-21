@@ -5,11 +5,12 @@ import CartDrawer from "./components/CartDrawer";
 import CustomizeModal from "./components/CustomizeModal";
 import DealsTab from "./components/DealsTab";
 import MenuTab from "./components/MenuTab";
+import HeritageTab from "./components/HeritageTab";
 import LocationsTab from "./components/LocationsTab";
 import { CartItem, PizzaItem, SideItem, PromoDeal, PizzaSize } from "./types";
 
 export default function App() {
-  const [activeTab, setActiveTab] = React.useState<"deals" | "menu" | "locations">("deals");
+  const [activeTab, setActiveTab] = React.useState<"deals" | "menu" | "heritage" | "locations">("deals");
   const [cart, setCart] = React.useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = React.useState(false);
   const [customizingPizza, setCustomizingPizza] = React.useState<PizzaItem | null>(null);
@@ -122,6 +123,9 @@ export default function App() {
             onAddSideToCart={handleAddSideToCart}
             onQuickAddPizza={handleQuickAddPizza}
           />
+        )}
+        {activeTab === "heritage" && (
+          <HeritageTab onOrderNow={() => setActiveTab("menu")} />
         )}
         {activeTab === "locations" && <LocationsTab />}
       </main>

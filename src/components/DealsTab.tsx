@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "motion/react";
 import { Flame, Star, ShoppingBag, Clock, Heart, Sparkles, Check, Send } from "lucide-react";
 import { PromoDeal, PizzaItem } from "../types";
-import { PROMO_DEALS, VALUE_TIERS, PIZZAS } from "../data";
+import { PROMO_DEALS, PIZZAS } from "../data";
 
 interface DealsTabProps {
   onOrderNow: () => void;
@@ -160,93 +160,6 @@ export default function DealsTab({
               </div>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* 3. Interactive Value Matrix (Value Tiers) */}
-      <section className="bg-dough-cream/60 rounded-3xl p-8 md:p-12 border border-orange-100/40 space-y-8">
-        <div className="text-center max-w-xl mx-auto space-y-2">
-          <span className="text-xs font-black text-maple-red uppercase tracking-widest font-label">Tier Matrix</span>
-          <h2 className="font-display text-2xl md:text-3xl font-black text-deep-charcoal">
-            The Canadian Value Pricing Structure
-          </h2>
-          <p className="text-sm text-secondary font-sans">
-            Whether dining solo or managing a high-energy house party, select the perfect handcrafted bundle tier.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {VALUE_TIERS.map((tier) => (
-            <div 
-              key={tier.id}
-              className={`bg-white rounded-2xl p-5 border flex flex-col justify-between space-y-4 hover:shadow-md transition-all ${
-                tier.isBestValue 
-                  ? "border-maple-red shadow-sm relative ring-2 ring-maple-red/10" 
-                  : "border-gray-100"
-              }`}
-            >
-              {tier.isBestValue && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-maple-red text-white text-[9px] font-black uppercase px-2.5 py-1 rounded-full tracking-wider">
-                  CROWD FAVORITE
-                </span>
-              )}
-              <div className="space-y-2">
-                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">
-                  {tier.tier}
-                </span>
-                <h3 className="font-display text-base font-black text-deep-charcoal">
-                  {tier.name}
-                </h3>
-                <p className="text-xs text-secondary leading-relaxed font-sans min-h-[40px]">
-                  {tier.description}
-                </p>
-              </div>
-
-              <div className="flex justify-between items-end pt-3 border-t border-gray-50">
-                <span className="font-display text-xl font-black text-maple-red">
-                  ${tier.price.toFixed(2)}
-                </span>
-                <button 
-                  onClick={onOrderNow}
-                  className="text-xs font-bold font-label text-deep-charcoal hover:text-maple-red transition-all cursor-pointer"
-                >
-                  Configure →
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 4. Heritage Storytelling (Dough Vitality) */}
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center bg-white border border-gray-100 rounded-3xl p-8 md:p-12 shadow-xs">
-        <div className="space-y-5">
-          <span className="text-xs font-black text-maple-red uppercase tracking-widest font-label block">HANDCRAFTED HERITAGE</span>
-          <h2 className="font-display text-2xl md:text-4xl font-black text-deep-charcoal leading-tight uppercase">
-            36-Hour Sourdough & Rich Dairy Vitality
-          </h2>
-          <p className="text-sm text-secondary font-sans leading-relaxed">
-            The secret to our gold-standard crisp is in the fermentation. We age our proprietary dough for exactly 36 hours, developing complex flavor notes and a light, digestible texture. 
-          </p>
-          <p className="text-sm text-secondary font-sans leading-relaxed">
-            Every pizza is topped with fresh 100% real Canadian mozzarella cheese made from local dairy farms, paired with sliced ingredients prepared fresh daily.
-          </p>
-          <div className="grid grid-cols-2 gap-4 pt-2 text-xs font-bold text-deep-charcoal font-display">
-            <div className="flex items-center gap-2 bg-dough-cream/40 p-3 rounded-xl">
-              <span className="text-xl">🌾</span> 100% Sourdough Base
-            </div>
-            <div className="flex items-center gap-2 bg-dough-cream/40 p-3 rounded-xl">
-              <span className="text-xl">🥛</span> Real Canadian Mozzarella
-            </div>
-          </div>
-        </div>
-
-        <div className="h-64 md:h-80 rounded-2xl overflow-hidden bg-gray-100 shadow-inner">
-          <img 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxw8vtzawWCXhzM3lpk7Oo-2NGHWdAOT7CPIIsWv5e44geaXXkEaI9tEJJkrhyq_VGGTo_51eEEdRfIDTBtfWIcS6dLsBRgKi4iI18hf0iYdiYR1R9cptgh6obNKPAy4hHVbQEkpsxQEB2ovhbBMJ8kTSbWuu07tdr9b81ONBgeXGAQsunntCdUlOwV1mmoYINzD9NIyfyvC-t-uUP3eigB7FTfEToKgdkL2LszzGMQEYNZdcPYNwFWg" 
-            alt="Handcrafting sourdough pizza crust" 
-            className="w-full h-full object-cover hover:scale-102 transition-transform duration-700"
-          />
         </div>
       </section>
 

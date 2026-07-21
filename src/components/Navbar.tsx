@@ -2,8 +2,8 @@ import React from "react";
 import { ShoppingCart, Menu, X } from "lucide-react";
 
 interface NavbarProps {
-  activeTab: "deals" | "menu" | "locations";
-  setActiveTab: (tab: "deals" | "menu" | "locations") => void;
+  activeTab: "deals" | "menu" | "heritage" | "locations";
+  setActiveTab: (tab: "deals" | "menu" | "heritage" | "locations") => void;
   cartCount: number;
   onCartClick: () => void;
 }
@@ -16,7 +16,7 @@ export default function Navbar({
 }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
-  const handleNavClick = (tab: "deals" | "menu" | "locations") => {
+  const handleNavClick = (tab: "deals" | "menu" | "heritage" | "locations") => {
     setActiveTab(tab);
     setMobileMenuOpen(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -64,6 +64,17 @@ export default function Navbar({
             }`}
           >
             MENU
+          </button>
+          <button 
+            id="nav-btn-heritage"
+            onClick={() => handleNavClick("heritage")}
+            className={`transition-all pb-1 border-b-2 hover:text-maple-red ${
+              activeTab === "heritage" 
+                ? "border-maple-red text-maple-red" 
+                : "border-transparent text-secondary hover:border-gray-200"
+            }`}
+          >
+            HERITAGE
           </button>
           <button 
             id="nav-btn-locations"
@@ -131,6 +142,14 @@ export default function Navbar({
             }`}
           >
             Explore Menu
+          </button>
+          <button 
+            onClick={() => handleNavClick("heritage")}
+            className={`text-left font-label text-[15px] font-bold py-2 ${
+              activeTab === "heritage" ? "text-maple-red" : "text-deep-charcoal"
+            }`}
+          >
+            Our Heritage
           </button>
           <button 
             onClick={() => handleNavClick("locations")}

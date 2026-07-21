@@ -14,7 +14,7 @@ export default function MenuTab({
   onAddSideToCart,
   onQuickAddPizza,
 }: MenuTabProps) {
-  const [selectedCategory, setSelectedCategory] = React.useState<"pizzas" | "sides">("pizzas");
+  const [selectedCategory, setSelectedCategory] = React.useState<"pizzas" | "sides" | "drinks">("pizzas");
   const [pizzaTypeFilter, setPizzaTypeFilter] = React.useState<"All" | PizzaType>("All");
   const [searchQuery, setSearchQuery] = React.useState("");
 
@@ -26,10 +26,20 @@ export default function MenuTab({
     return matchesSearch && matchesType;
   });
 
-  // Filtering sides & drinks
+  // Filtering sides
   const filteredSides = SIDES.filter((side) => {
-    return side.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-           side.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = side.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          side.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = side.category === "Sides";
+    return matchesSearch && matchesCategory;
+  });
+
+  // Filtering drinks
+  const filteredDrinks = SIDES.filter((side) => {
+    const matchesSearch = side.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          side.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = side.category === "Drinks";
+    return matchesSearch && matchesCategory;
   });
 
   return (
@@ -57,7 +67,7 @@ export default function MenuTab({
       {/* Filter and Search Bar */}
       <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-xs space-y-4 md:space-y-0 md:flex md:items-center md:justify-between gap-6">
         {/* Category toggles */}
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <button
             onClick={() => { setSelectedCategory("pizzas"); setSearchQuery(""); }}
             className={`px-5 py-2.5 rounded-xl font-label text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
@@ -76,7 +86,17 @@ export default function MenuTab({
                 : "bg-gray-50 text-secondary hover:bg-gray-100"
             }`}
           >
-            Sides & Cold Drinks
+            Signature Sides
+          </button>
+          <button
+            onClick={() => { setSelectedCategory("drinks"); setSearchQuery(""); }}
+            className={`px-5 py-2.5 rounded-xl font-label text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
+              selectedCategory === "drinks"
+                ? "bg-deep-charcoal text-white"
+                : "bg-gray-50 text-secondary hover:bg-gray-100"
+            }`}
+          >
+            Cold Drinks
           </button>
         </div>
 
@@ -87,7 +107,13 @@ export default function MenuTab({
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder={`Search ${selectedCategory === "pizzas" ? "pizzas (e.g. Pepperoni, Chicken)" : "sides & sodas..."}`}
+            placeholder={`Search ${
+              selectedCategory === "pizzas" 
+                ? "pizzas (e.g. Pepperoni, Chicken)" 
+                : selectedCategory === "sides" 
+                ? "sides (e.g. Garlic Bread, Wings)..." 
+                : "drinks (e.g. Coca-Cola, Sprite)..."
+            }`}
             className="w-full pl-10 pr-4 py-2.5 text-xs bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-maple-red font-sans"
           />
         </div>
@@ -195,16 +221,60 @@ export default function MenuTab({
         </div>
       )}
 
-      {/* Sides & Cold Drinks View */}
+      {/* Sides View */}
       {selectedCategory === "sides" && (
         <div>
           {filteredSides.length === 0 ? (
             <div className="text-center py-16 text-gray-400 font-sans text-xs">
-              No matching sides or drinks found.
+              No matching sides found.
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredSides.map((side) => (
+                <div
+                  key={side.id}
+                  className="bg-white border border-gray-100 rounded-2xl p-5 flex flex-col justify-between hover:shadow-md transition-all relative"
+                >
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-start">
+                      <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">
+                        {side.category}
+                      </span>
+                      <span className="font-display font-black text-maple-red text-sm">
+                        ${side.price.toFixed(2)}
+                      </span>
+                    </div>
+                    <h3 className="font-display text-base font-black text-deep-charcoal">
+                      {side.name}
+                    </h3>
+                    <p className="text-xs text-secondary font-sans leading-relaxed">
+                      {side.description}
+                    </p>
+                  </div>
+
+                  <button
+                    onClick={() => onAddSideToCart(side)}
+                    className="w-full bg-deep-charcoal hover:bg-maple-red text-white py-2.5 rounded-xl font-label text-xs font-bold uppercase tracking-wider transition-all duration-200 mt-4 active:scale-95 cursor-pointer flex items-center justify-center gap-2"
+                  >
+                    <ShoppingBag className="h-3.5 w-3.5" /> Add to Basket
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Cold Drinks View */}
+      {selectedCategory === "drinks" && (
+        <div>
+          {filteredDrinks.length === 0 ? (
+            <div className="text-center py-16 text-gray-400 font-sans text-xs">
+              No matching cold drinks found.
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredDrinks.map((side) => (
                 <div
                   key={side.id}
                   className="bg-white border border-gray-100 rounded-2xl p-5 flex flex-col justify-between hover:shadow-md transition-all relative"

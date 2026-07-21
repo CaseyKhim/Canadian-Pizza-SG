@@ -2,7 +2,7 @@ import React from "react";
 import { Share2, MessageCircle, Instagram, MapPin } from "lucide-react";
 
 interface FooterProps {
-  onNavClick: (tab: "deals" | "menu" | "locations") => void;
+  onNavClick: (tab: "deals" | "menu" | "heritage" | "locations") => void;
 }
 
 export default function Footer({ onNavClick }: FooterProps) {
@@ -59,6 +59,11 @@ export default function Footer({ onNavClick }: FooterProps) {
             <li>
               <button onClick={() => onNavClick("deals")} className="hover:text-white transition-colors text-left">
                 Hot Deals
+              </button>
+            </li>
+            <li>
+              <button onClick={() => onNavClick("heritage")} className="hover:text-white transition-colors text-left">
+                Our Heritage
               </button>
             </li>
             <li>
