@@ -2,7 +2,7 @@ import React from "react";
 import { Share2, MessageCircle, Instagram, MapPin } from "lucide-react";
 
 interface FooterProps {
-  onNavClick: (tab: "deals" | "menu" | "heritage" | "locations") => void;
+  onNavClick: (tab: "deals" | "menu" | "heritage" | "locations" | "tracker") => void;
 }
 
 export default function Footer({ onNavClick }: FooterProps) {
@@ -86,7 +86,7 @@ export default function Footer({ onNavClick }: FooterProps) {
         </p>
         <div className="flex items-center gap-2 text-xs text-gray-400 font-sans bg-gray-900 px-3 py-1.5 rounded-lg">
           <MapPin className="h-3.5 w-3.5 text-maple-red" />
-          <span>Canada Edition</span>
+          <span>Singapore Edition</span>
         </div>
       </div>
     </footer>

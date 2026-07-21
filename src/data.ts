@@ -188,44 +188,44 @@ export const VALUE_TIERS = [
 
 export const LOCATIONS: LocationItem[] = [
   {
-    id: "richmond-hill",
-    name: "Richmond Hill Main",
-    address: "10220 Yonge St, Richmond Hill, ON L4C 3B6",
-    phone: "(905) 884-2121",
+    id: "tampines-mall",
+    name: "Tampines Mall Outlet",
+    address: "4 Tampines Central 5, #01-12 Tampines Mall, Singapore 529510",
+    phone: "+65 6788 2121",
     hours: "11:00 AM - 11:00 PM",
     isOpen: true,
-    lat: 53.0,
-    lng: 69.5
+    lat: 32.0,
+    lng: 82.0
   },
   {
-    id: "aurora-north",
-    name: "Aurora North",
-    address: "15440 Yonge St, Aurora, ON L4G 1P2",
-    phone: "(905) 727-2121",
+    id: "jurong-point",
+    name: "Jurong Point Outlet",
+    address: "1 Jurong West Central 2, #02-21 Jurong Point, Singapore 648886",
+    phone: "+65 6862 2121",
     hours: "11:00 AM - 10:00 PM",
     isOpen: true,
-    lat: 23.5,
-    lng: 58.0
+    lat: 42.0,
+    lng: 15.0
   },
   {
-    id: "markham-south",
-    name: "Markham South",
-    address: "7700 Markham Rd, Markham, ON L3S 4S1",
-    phone: "(905) 472-2121",
+    id: "suntec-city",
+    name: "Suntec City Outlet",
+    address: "3 Temasek Blvd, #B1-145 Suntec City Mall, Singapore 038983",
+    phone: "+65 6235 2121",
     hours: "11:00 AM - 11:30 PM",
     isOpen: true,
-    lat: 38.0,
-    lng: 39.5
+    lat: 58.0,
+    lng: 52.0
   },
   {
-    id: "scarborough-east",
-    name: "Scarborough East",
-    address: "4500 Kingston Rd, Scarborough, ON M1E 2P3",
-    phone: "(416) 282-2121",
+    id: "novena-square",
+    name: "Novena Square Outlet",
+    address: "238 Thomson Rd, #01-08 Velocity@Novena Square, Singapore 307683",
+    phone: "+65 6354 2121",
     hours: "11:00 AM - 11:00 PM",
     isOpen: true,
-    lat: 54.5,
-    lng: 82.5
+    lat: 25.0,
+    lng: 48.0
   }
 ];
 

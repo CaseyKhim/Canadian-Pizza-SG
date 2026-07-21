@@ -59,3 +59,22 @@ export interface LocationItem {
   lat: number; // percentage coordinate for map overlay (Y or top)
   lng: number; // percentage coordinate for map overlay (X or left)
 }
+
+export type OrderStatus = "Received" | "Preparing" | "Baking" | "Out for Delivery" | "Delivered";
+
+export interface Order {
+  id: string;
+  items: CartItem[];
+  subtotal: number;
+  discount: number;
+  taxes: number;
+  deliveryFee: number;
+  grandTotal: number;
+  address: string;
+  phone: string;
+  createdAt: string;
+  status: OrderStatus;
+  statusProgress: number; // 0 to 100
+  estimatedMinutesLeft: number;
+}
+

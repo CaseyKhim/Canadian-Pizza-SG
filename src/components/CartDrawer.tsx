@@ -1,7 +1,7 @@
 import React from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X, Trash2, ShoppingBag, Plus, Minus, CheckCircle } from "lucide-react";
-import { CartItem } from "../types";
+import { CartItem, Order } from "../types";
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -10,6 +10,16 @@ interface CartDrawerProps {
   updateQuantity: (cartId: string, delta: number) => void;
   removeFromCart: (cartId: string) => void;
   clearCart: () => void;
+  onPlaceOrder?: (
+    items: CartItem[],
+    subtotal: number,
+    discount: number,
+    taxes: number,
+    deliveryFee: number,
+    grandTotal: number,
+    address: string,
+    phone: string
+  ) => void;
 }
 
 export default function CartDrawer({
@@ -19,11 +29,13 @@ export default function CartDrawer({
   updateQuantity,
   removeFromCart,
   clearCart,
+  onPlaceOrder,
 }: CartDrawerProps) {
   const [isCheckingOut, setIsCheckingOut] = React.useState(false);
   const [orderCompleted, setOrderCompleted] = React.useState(false);
   const [address, setAddress] = React.useState("");
   const [phone, setPhone] = React.useState("");
+
 
   // 2-for-1 Discount Calculator
   // Rules: Pizzas are paired. For every pair, the cheaper pizza is FREE (100% discount).
@@ -71,7 +83,7 @@ export default function CartDrawer({
 
     const totalBeforeDiscount = subtotal + otherTotal;
     const finalTotal = totalBeforeDiscount - pizzaDiscount;
-    const taxes = finalTotal * 0.13; // Ontario 13% HST
+    const taxes = finalTotal * 0.09; // Singapore 9% GST
     const deliveryFee = finalTotal > 30 ? 0 : 3.99;
     const grandTotal = finalTotal + taxes + deliveryFee;
 
@@ -97,6 +109,18 @@ export default function CartDrawer({
     setTimeout(() => {
       setIsCheckingOut(false);
       setOrderCompleted(true);
+      if (onPlaceOrder) {
+        onPlaceOrder(
+          cart,
+          subtotal,
+          pizzaDiscount,
+          taxes,
+          deliveryFee,
+          grandTotal,
+          address,
+          phone
+        );
+      }
     }, 2000);
   };
 
@@ -170,7 +194,7 @@ export default function CartDrawer({
                     <p><strong>Deliver To:</strong> {address || "Takeout Pick-Up Counter"}</p>
                     <p><strong>Mobile Contact:</strong> {phone || "N/A"}</p>
                     <p><strong>Estimated Arrival:</strong> 25 - 35 mins</p>
-                    <p><strong>Paid Total:</strong> ${grandTotal.toFixed(2)} (HST Included)</p>
+                    <p><strong>Paid Total:</strong> ${grandTotal.toFixed(2)} (GST Included)</p>
                   </div>
                   <button
                     onClick={handleReset}
@@ -318,7 +342,7 @@ export default function CartDrawer({
                         type="text"
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
-                        placeholder="e.g. 10220 Yonge St, Richmond Hill"
+                        placeholder="e.g. 4 Tampines Central 5, Singapore"
                         className="w-full text-xs px-3.5 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-maple-red font-sans"
                       />
                     </div>
@@ -331,7 +355,7 @@ export default function CartDrawer({
                         type="tel"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        placeholder="e.g. (905) 884-2121"
+                        placeholder="e.g. +65 6788 2121"
                         className="w-full text-xs px-3.5 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-maple-red font-sans"
                       />
                     </div>
@@ -349,8 +373,8 @@ export default function CartDrawer({
                         </div>
                       )}
                       <div className="flex justify-between">
-                        <span>Ontario HST (13%)</span>
-                        <span>-${taxes.toFixed(2)}</span>
+                        <span>Singapore GST (9%)</span>
+                        <span>${taxes.toFixed(2)}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Delivery Fee</span>

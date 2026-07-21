@@ -2,10 +2,11 @@ import React from "react";
 import { ShoppingCart, Menu, X } from "lucide-react";
 
 interface NavbarProps {
-  activeTab: "deals" | "menu" | "heritage" | "locations";
-  setActiveTab: (tab: "deals" | "menu" | "heritage" | "locations") => void;
+  activeTab: "deals" | "menu" | "heritage" | "locations" | "tracker";
+  setActiveTab: (tab: "deals" | "menu" | "heritage" | "locations" | "tracker") => void;
   cartCount: number;
   onCartClick: () => void;
+  activeOrdersCount?: number;
 }
 
 export default function Navbar({
@@ -13,14 +14,16 @@ export default function Navbar({
   setActiveTab,
   cartCount,
   onCartClick,
+  activeOrdersCount = 0,
 }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
-  const handleNavClick = (tab: "deals" | "menu" | "heritage" | "locations") => {
+  const handleNavClick = (tab: "deals" | "menu" | "heritage" | "locations" | "tracker") => {
     setActiveTab(tab);
     setMobileMenuOpen(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
 
   return (
     <header className="fixed top-0 left-0 right-0 w-full z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 transition-all duration-300">
@@ -86,6 +89,23 @@ export default function Navbar({
             }`}
           >
             LOCATIONS
+          </button>
+          <button 
+            id="nav-btn-tracker"
+            onClick={() => handleNavClick("tracker")}
+            className={`transition-all pb-1 border-b-2 hover:text-maple-red flex items-center gap-1.5 ${
+              activeTab === "tracker" 
+                ? "border-maple-red text-maple-red" 
+                : "border-transparent text-secondary hover:border-gray-200"
+            }`}
+          >
+            TRACK ORDER
+            {activeOrdersCount > 0 && (
+              <span className="flex h-2 w-2 relative">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+              </span>
+            )}
           </button>
         </div>
 
@@ -158,6 +178,19 @@ export default function Navbar({
             }`}
           >
             Locations & Hours
+          </button>
+          <button 
+            onClick={() => handleNavClick("tracker")}
+            className={`text-left font-label text-[15px] font-bold py-2 flex items-center justify-between ${
+              activeTab === "tracker" ? "text-maple-red" : "text-deep-charcoal"
+            }`}
+          >
+            <span>Track Order</span>
+            {activeOrdersCount > 0 && (
+              <span className="bg-maple-red text-white text-[10px] font-black px-2 py-0.5 rounded-full">
+                {activeOrdersCount} ACTIVE
+              </span>
+            )}
           </button>
           <button 
             onClick={() => handleNavClick("menu")}

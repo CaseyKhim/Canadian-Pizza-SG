@@ -14,8 +14,8 @@ export default function LocationsTab() {
 
   const handleDirections = (loc: LocationItem) => {
     const encodedAddress = encodeURIComponent(loc.address);
-    // Open maps in a safe way without trigger iframe blocks, or just simulate it in-app with a beautiful success toast!
-    alert(`Getting directions to ${loc.name} at: ${loc.address}\nOptimal route calculated: 8 mins via ON-404 S.`);
+    // Open maps in a safe way without triggering iframe blocks, or just simulate it in-app with a beautiful success toast!
+    alert(`Getting directions to ${loc.name} at: ${loc.address}\nOptimal route calculated: 15 mins via Pan Island Expressway (PIE).`);
   };
 
   return (
@@ -23,10 +23,10 @@ export default function LocationsTab() {
       <div className="text-center max-w-xl mx-auto space-y-2">
         <span className="text-xs font-black text-maple-red uppercase tracking-widest font-label block">Store Finder</span>
         <h2 className="font-display text-2xl md:text-3xl font-black text-deep-charcoal">
-          Canadian 2-for-1 Pizzas Near You
+          Canadian 2-for-1 Pizzas in Singapore
         </h2>
         <p className="text-sm text-secondary font-sans">
-          Locate our hot pizza ovens in Greater Toronto. Order for immediate pickup or high-speed direct home delivery.
+          Locate our hot pizza ovens across Singapore. Order for immediate pickup or high-speed direct home delivery.
         </p>
       </div>
 
@@ -41,7 +41,7 @@ export default function LocationsTab() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search by City or Street (e.g. Richmond Hill, Aurora)..."
+              placeholder="Search by Mall, Region or Street (e.g. Tampines, Jurong, Suntec)..."
               className="w-full pl-11 pr-4 py-2.5 text-xs focus:outline-none font-sans bg-transparent"
             />
           </div>
@@ -50,7 +50,7 @@ export default function LocationsTab() {
           <div className="space-y-3 max-h-[500px] overflow-y-auto pr-1">
             {filteredLocations.length === 0 ? (
               <div className="bg-white rounded-2xl p-8 border border-gray-100 text-center text-xs text-gray-400 font-sans">
-                No store locations match your query in Greater Toronto.
+                No store locations match your query in Singapore.
               </div>
             ) : (
               filteredLocations.map((loc) => {
@@ -115,7 +115,7 @@ export default function LocationsTab() {
         <div className="col-span-12 lg:col-span-7">
           <div className="bg-white border border-gray-100 rounded-3xl p-4 shadow-sm space-y-4">
             <div className="flex justify-between items-center text-xs font-bold text-gray-400 uppercase tracking-wider">
-              <span>Interactive Toronto North Locator Map</span>
+              <span>Interactive Singapore Locator Map</span>
               <span className="text-[10px] text-maple-red flex items-center gap-1">
                 <Compass className="h-3.5 w-3.5 animate-spin" /> Click Pins to Select Store
               </span>
@@ -130,19 +130,19 @@ export default function LocationsTab() {
               <div className="absolute bottom-0 left-0 right-0 h-16 bg-blue-100/80 border-t border-blue-200" />
 
               {/* Stylized highway networks */}
-              <div className="absolute top-1/4 left-0 right-0 h-1 bg-yellow-400/50 transform -rotate-1" /> {/* Highway 407 */}
-              <div className="absolute top-1/2 left-0 right-0 h-1 bg-yellow-400/50 transform rotate-2" /> {/* Highway 7 */}
-              <div className="absolute top-0 bottom-0 left-1/3 w-1 bg-yellow-400/50" /> {/* Highway 404 */}
+              <div className="absolute top-1/4 left-0 right-0 h-1 bg-yellow-400/50 transform -rotate-1" /> {/* PIE */}
+              <div className="absolute top-1/2 left-0 right-0 h-1 bg-yellow-400/50 transform rotate-2" /> {/* AYE */}
+              <div className="absolute top-0 bottom-0 left-1/2 w-1 bg-yellow-400/50" /> {/* CTE */}
 
               {/* Map labels */}
               <span className="absolute bottom-4 left-6 text-[10px] font-black uppercase text-blue-800 tracking-widest">
-                Lake Ontario
+                Singapore Strait
               </span>
               <span className="absolute top-6 left-6 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                York Region
+                Johor Strait
               </span>
               <span className="absolute top-1/3 right-10 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                Markham Sector
+                East Region
               </span>
 
               {/* Interactive pins */}
